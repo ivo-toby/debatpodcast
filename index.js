@@ -10,20 +10,14 @@ const API = require(`./dist/${azFunction}/index`).default;
 
 // // Map local settings to process.env
 const settings = require('./local.settings.json');
+
 Object.keys(settings.Values).forEach((setting) => {
     const value = settings.Values[setting];
     process.env[setting] = value;
 })
 
 API(context, req).then((response) => {
-    if (response.res.body.contentCollection) {
-        console.log(
-            util.inspect(response.res.body.contentCollection, false, null, true)
-        );
-    } else {
-        // alternative shortcut
-        console.log(
-            util.inspect(response.res.body, false, null, true)
-        );
-    }
+    console.log(
+        util.inspect(response, false, null, true)
+    );
 });

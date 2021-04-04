@@ -7,7 +7,7 @@
         "watch": "tsc -w",
         "prestart": "npm run build",
         "start": "func start",
-        "dev-generate-feed": "./node_modules/.bin/tsc-watch --onSuccess \"node index.js --function=GenerateFeed --mock=GenerateFeed \"",
+        "dev-process-feed": "./node_modules/.bin/tsc-watch --onSuccess \"node index.js --function=ProcessFeed --mock=ProcessFeed \"",
         "test": "echo \"No tests yet...\"",
         "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx ./",
         "fix": "./node_modules/.bin/eslint --fix --ext .js,.jsx,.ts,.tsx ./"

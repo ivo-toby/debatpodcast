@@ -8,12 +8,12 @@
     <managingEditor>ivo.toby@gmail.com (Software dev)</managingEditor>
     <copyright>© Rijksoverheid </copyright>
     <generator>IVO</generator>
-    <atom:link href="https://rss.art19.com/met-nerds-om-tafel" rel="self" type="application/rss+xml" />
-    <link>https://art19.com/shows/met-nerds-om-tafel</link>
-    <itunes:new-feed-url>https://rss.art19.com/met-nerds-om-tafel</itunes:new-feed-url>
+    <atom:link href="https://syntacticsugar.nl/podcast" rel="self" type="application/rss+xml" />
+    <link>https://syntacticsugar.nl/podcast</link>
+    <itunes:new-feed-url>https://syntacticsugar.nl/podcast</itunes:new-feed-url>
     <itunes:owner>
       <itunes:name>Debat Direct Podcast</itunes:name>
-      <itunes:email>metnerdsomtafel@gmail.com</itunes:email>
+      <itunes:email>ivotoby@gmail.com</itunes:email>
     </itunes:owner>
     <itunes:author>Debat Direct</itunes:author>
     <itunes:summary>
@@ -25,7 +25,7 @@
     <itunes:category text="News">
       <itunes:category text="Tech News" />
     </itunes:category>
-    <itunes:keywords>video games,tech,consumer technology,technology,nerds</itunes:keywords>
+    <itunes:keywords>politics, debate, news</itunes:keywords>
     <itunes:type>episodic</itunes:type>
     <itunes:image href="https://cdn.debatdirect.tweedekamer.nl/static/img/bg/plenaire-zaal.jpg" />
     <image>
@@ -47,13 +47,12 @@
         <![CDATA[<p>De Kamer debatteert met de voormalig verkenners Ollongren en Jorritsma over de ontstane situatie in de kabinetsformatie.</p>]]>
       </content:encoded>
       <itunes:season>2021</itunes:season>
-      <guid isPermaLink="false">gid://art19-episode-locator/V0/ac3AX417j3114DrUeTAx97vWVn5IrhB7TSAlYnmpR94</guid>
       <pubDate>Wed, 31 Mar 2021 14:00:00 -0000</pubDate>
       <itunes:explicit>no</itunes:explicit>
       <itunes:image href="https://cdn.debatdirect.tweedekamer.nl/static/img/bg/plenaire-zaal.jpg" />
-      <itunes:keywords>VIdeo Games,TECH,technology,consumer technology,NERDS</itunes:keywords>
+      <itunes:keywords>Politics, debate, dutch, Tweede kamer, parlement</itunes:keywords>
       <itunes:duration>01:40:30</itunes:duration>
-      <enclosure url="" type="audio/mpeg" length="96481280" />
+      <enclosure url="https://livestream.tweedekamer.nl/2021-04-01/plenaire_zaal/audio/prog_index.m3u8?sourcetimestamps=1&amp;start=2021-04-01T13:33:04+0200&amp;end=2021-04-02T03:02:43+0200" type="audio/mpeg" length="96481280" />
     </item>
 
   </channel>

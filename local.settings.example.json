@@ -1,0 +1,18 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "AZURE_STORAGE_ACCOUNT": "",
+        "AZURE_STORAGE_TABLE_PREFIX": "",
+        "AZURE_STORAGE_ACCESS_KEY": "",
+        "AZURE_STORAGE_CONNECTION_STRING": "",
+        "API_ENDPOINT_URL": "",
+        "AzureWebJobs.Content.Disabled": "true",
+        "PIPEDREAM_URL": "https://2bc4894d54cea163819bfab874397155.m.pipedream.net"
+    },
+    "ConnectionStrings": {},
+    "Host": {
+        "CORS": "*"
+    }
+}
