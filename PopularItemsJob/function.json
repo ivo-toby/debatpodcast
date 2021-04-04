@@ -1,0 +1,9 @@
+{
+    "bindings": [{
+        "name": "PopularItemsJob",
+        "type": "timerTrigger",
+        "direction": "in",
+        "schedule": "0 * */30 * * *"
+    }],
+    "scriptFile": "../dist/PopularItemsJob/index.js"
+}

@@ -1,0 +1,33 @@
+{
+    "env": {
+        "node": true,
+        "jest": true
+    },
+    "parserOptions": {
+        "project": "./tsconfig.json",
+    },
+    "rules": {
+        // enable additional rules
+        "max-len" : 0,
+        "@typescript-eslint/indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "no-underscore-dangle" : 0,
+        "arrow-body-style": 0,
+        "class-methods-use-this" : 0,
+        "import/prefer-default-export":0,
+        "@typescript-eslint/type-annotation-spacing": ["warn", {
+            "before": false,
+            "after": true
+        }],        // override default options for rules from base configurations
+        // "comma-dangle": ["error", "always"],
+        // "no-cond-assign": ["error", "always"],
+
+        // disable rules from base configurations
+        "no-console": "warn"
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "airbnb-typescript"
+    ]
+}
