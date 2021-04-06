@@ -26,7 +26,6 @@ export type IJobEntity = joi.extractType<typeof JobEntitySchema>;
 /** 404 */
 export const CacheEntitySchema = joi.object({
     ...AbstractTableEntitySchema,
-    type: joi.string().required(),
     data: joi.string().optional(),
 });
 

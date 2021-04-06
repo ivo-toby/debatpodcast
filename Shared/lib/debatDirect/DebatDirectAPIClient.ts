@@ -17,7 +17,7 @@ export default class DebatDirectAPIClient extends HttpClient {
             result = await this.instance.get<string, DebatDay>(
                 `${this.baseURL}agenda/${day}`,
             );
-            // TODO: save to cache
+            this.cache.add('day', day, result);
         }
         return result;
     }
