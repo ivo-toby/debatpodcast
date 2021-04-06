@@ -11,14 +11,7 @@ export default class DebatDirectAPIClient extends HttpClient {
     }
 
     public async getDay(day: string, forceDownload = false): Promise<DebatDay | boolean> {
-        // try to fetch from database;
-        let result = await this.cache.getCached<DebatDay | boolean>('day', day);
-        if (!result || forceDownload) {
-            result = await this.instance.get<string, DebatDay>(
-                `${this.baseURL}agenda/${day}`,
-            );
-            this.cache.add('day', day, result);
-        }
-        return result;
+        const results = await this.get<DebatDay | boolean>(`agenda/${day}`, forceDownload);
+        return results;
     }
 }

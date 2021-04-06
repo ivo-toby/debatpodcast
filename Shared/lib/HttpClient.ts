@@ -3,9 +3,12 @@
  */
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import https from 'https';
+import { CacheFactory } from './db/factories';
 
 abstract class HttpClient {
     protected readonly instance: AxiosInstance;
+
+    protected cache: CacheFactory;
 
     protected baseURL: string;
 
@@ -23,6 +26,7 @@ abstract class HttpClient {
             },
         });
         this._initializeResponseInterceptor();
+        this.cache = new CacheFactory();
     }
 
     protected _initializeResponseInterceptor = () => {
@@ -37,6 +41,17 @@ abstract class HttpClient {
     };
 
     protected _handleError = (error: any) => Promise.reject(error);
+
+    public async get<T>(endPoint: string, forceDownload = false): Promise<T | boolean> {
+        let result = await this.cache.getCached<T | boolean>('apiCall', endPoint);
+        if (!result || forceDownload) {
+            result = await this.instance.get<string, T>(
+                `${this.baseURL}${endPoint}`,
+            );
+            this.cache.add('apiCall', endPoint, result);
+        }
+        return result;
+    }
 }
 
 export default HttpClient;

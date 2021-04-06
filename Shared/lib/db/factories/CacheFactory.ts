@@ -1,7 +1,8 @@
 // import { ValidationResult } from '@hapi/joi';
 import AbstractTableStorageFactory from './AbstractTableStorageFactory';
 import { ITableStorageModel } from './ITableStorageModel';
-import { ICacheEntity, CacheEntitySchema, ITableEntity } from '../entities/ITableEntities';
+import { ICacheEntity, CacheEntitySchema } from '../entities/ITableEntities';
+import { createHash } from '../../createHash';
 
 export default class CacheFactory extends AbstractTableStorageFactory implements ITableStorageModel {
     PartitionKey = '';
@@ -29,8 +30,9 @@ export default class CacheFactory extends AbstractTableStorageFactory implements
     async getCached<T>(type: string, rowKey: string): Promise<T | boolean> {
         this.PartitionKey = type;
         await this.init();
+        const hashedRowKey = createHash(rowKey);
         try {
-            const record = await this.getById<ICacheEntity>(rowKey);
+            const record = await this.getById<ICacheEntity>(hashedRowKey);
             if (record.data) {
                 return JSON.parse(record.data);
             }
@@ -43,9 +45,11 @@ export default class CacheFactory extends AbstractTableStorageFactory implements
     async add<T>(type: string, rowKey: string, data: T): Promise<boolean> {
         this.PartitionKey = type;
         await this.init();
+        const hashedRowKey = createHash(rowKey);
+
         const newEntity = {
             PartitionKey: type,
-            RowKey: rowKey,
+            RowKey: hashedRowKey,
             data: JSON.stringify(data),
         };
         if (this.validateEntity(newEntity)) {
