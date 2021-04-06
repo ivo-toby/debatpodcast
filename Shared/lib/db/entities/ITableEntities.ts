@@ -12,7 +12,6 @@ const AbstractTableEntitySchema = {
 export const TableEntitySchema = joi.object(AbstractTableEntitySchema);
 export type ITableEntity = joi.extractType<typeof TableEntitySchema>;
 
-/** Sitevisits */
 export const JobEntitySchema = joi.object({
     ...AbstractTableEntitySchema,
     jobType: joi.string().required(),
@@ -23,7 +22,6 @@ export const JobEntitySchema = joi.object({
 
 export type IJobEntity = joi.extractType<typeof JobEntitySchema>;
 
-/** 404 */
 export const CacheEntitySchema = joi.object({
     ...AbstractTableEntitySchema,
     data: joi.string().optional(),

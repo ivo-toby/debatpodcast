@@ -22,3 +22,15 @@
 
 - output write should be decoupled
 - output upload should be decoupled
+
+
+### Job Objects
+
+Extend from a AbstractJob.
+What does a job need to do or contain?
+- a job has a status, type
+- a job has a method that retrieves data
+- a job has a method to map retrieved data to fixed fields needed for generating RSS
+- a job has a method that generates rss
+- a job has a method to save RSS to a file or another endpoint
+- a job has methods to save data to the database

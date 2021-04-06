@@ -42,14 +42,18 @@ abstract class HttpClient {
 
     protected _handleError = (error: any) => Promise.reject(error);
 
-    public async get<T>(endPoint: string, forceDownload = false): Promise<T | boolean> {
-        let result = await this.cache.getCached<T | boolean>('apiCall', endPoint);
-        if (!result || forceDownload) {
+    public async get<T>(endPoint: string, forceDownload = false): Promise<T> {
+        let result: T;
+        const cached = await this.cache.getCached<T>('apiCall', endPoint);
+        if (!cached || forceDownload) {
             result = await this.instance.get<string, T>(
                 `${this.baseURL}${endPoint}`,
             );
             this.cache.add('apiCall', endPoint, result);
+        } else {
+            result = cached as T;
         }
+
         return result;
     }
 }

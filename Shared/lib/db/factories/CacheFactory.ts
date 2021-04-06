@@ -1,4 +1,5 @@
 // import { ValidationResult } from '@hapi/joi';
+import zlib from 'zlib';
 import AbstractTableStorageFactory from './AbstractTableStorageFactory';
 import { ITableStorageModel } from './ITableStorageModel';
 import { ICacheEntity, CacheEntitySchema } from '../entities/ITableEntities';
@@ -34,7 +35,9 @@ export default class CacheFactory extends AbstractTableStorageFactory implements
         try {
             const record = await this.getById<ICacheEntity>(hashedRowKey);
             if (record.data) {
-                return JSON.parse(record.data);
+                // eslint-disable-next-line no-buffer-constructor
+                const deflated = zlib.inflateSync(new Buffer(record.data, 'base64')).toString();
+                return JSON.parse(deflated);
             }
         } catch (e) {
             // not found, do nothing
@@ -46,11 +49,11 @@ export default class CacheFactory extends AbstractTableStorageFactory implements
         this.PartitionKey = type;
         await this.init();
         const hashedRowKey = createHash(rowKey);
-
+        const deflated = zlib.deflateSync(JSON.stringify(data)).toString('base64');
         const newEntity = {
             PartitionKey: type,
             RowKey: hashedRowKey,
-            data: JSON.stringify(data),
+            data: deflated,
         };
         if (this.validateEntity(newEntity)) {
             try {
