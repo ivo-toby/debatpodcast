@@ -30,5 +30,6 @@ export type AbstractJobType = {
     saveRSS(): Promise<boolean>,
     saveData(): Promise<boolean>,
     saveStatus(): Promise<boolean>,
-    process(options: QueueOptions): Promise<boolean>
+    process(options: QueueOptions): Promise<string>,
+    output(): string
 };

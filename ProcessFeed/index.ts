@@ -47,10 +47,12 @@ const timerTrigger: AzureFunction = async (context: Context, myTimer: any): Prom
         /**
          * Create job object(s) to be run
          */
-        queue.add(jobFactory(JobTypeEnum.main));
+        const mainJob = jobFactory(JobTypeEnum.main);
+        queue.add(mainJob);
 
-        const queueSuccess = await queue.run();
-        console.log(queueSuccess);
+        await queue.run();
+
+        console.log(mainJob.output());
     }
     context.log('Timer trigger function ran!', timeStamp);
 };

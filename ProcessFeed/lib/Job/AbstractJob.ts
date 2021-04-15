@@ -12,6 +12,8 @@ export abstract class AbstractJob<TData> implements AbstractJobType {
 
     public apiData: TData;
 
+    public xml: string;
+
     options: QueueOptions;
 
     items: Array<Podcast.Item> = [];
@@ -27,9 +29,9 @@ export abstract class AbstractJob<TData> implements AbstractJobType {
     }
 
     generateRSS(): string {
-        const feed = new Podcast(this.options.feedOptions, this.items);
-        console.error('NEEDS IMPLEMENTATION');
-        return '';
+        const feed = new Podcast(this.options.feedOptions, this.podcastItems);
+        this.xml = feed.buildXml();
+        return this.xml;
     }
 
     async saveRSS(): Promise<boolean> {
@@ -47,7 +49,7 @@ export abstract class AbstractJob<TData> implements AbstractJobType {
         return new Promise<boolean>((resolve) => { resolve(true); });
     }
 
-    async process(options: QueueOptions): Promise<boolean> {
+    async process(options: QueueOptions): Promise<string> {
         this.options = options;
 
         await this.getData<TData>();
@@ -56,6 +58,10 @@ export abstract class AbstractJob<TData> implements AbstractJobType {
         await this.saveData();
         await this.saveRSS();
         await this.saveStatus();
-        return true;
+        return this.xml;
+    }
+
+    output(): string {
+        return this.xml;
     }
 }
