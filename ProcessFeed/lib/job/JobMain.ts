@@ -1,11 +1,19 @@
-import { createTableServiceWithSas } from 'azure-storage';
 import Podcast from 'podcast';
+import config from '../../config/main.json';
 import DebatDirectAPIClient from '../debatDirect/DebatDirectAPIClient';
 import { DebatDay, Debate, DebateDetails } from '../debatDirect/debatTypes';
-import { AbstractJob } from './AbstractJob';
-import { AbstractJobType } from './types';
+import { saveRSS, saveStatus, uploadRSS } from '../middleware';
+import AbstractJob from './AbstractJob';
+import { AbstractJobType, PodcastOptions } from './types';
 
-export class JobMain extends AbstractJob<DebatDay> implements AbstractJobType {
+export default class JobMain extends AbstractJob<DebatDay> implements AbstractJobType {
+    public constructor(options: PodcastOptions) {
+        super({
+            feedSettings: config,
+            ...options,
+        });
+    }
+
     async getData<DebatDay>(): Promise<DebatDay> {
         const api = new DebatDirectAPIClient();
         const { debateDate } = this.options;
@@ -13,8 +21,9 @@ export class JobMain extends AbstractJob<DebatDay> implements AbstractJobType {
         return this.apiData as unknown as DebatDay;
     }
 
-    async mapData(): Promise<any> { // Array<Podcast.Item>
-        const podcastItems = await this.apiData.debates.map(async (apiItem) => {
+    async mapData(): Promise<Array<Podcast.Item>> {
+        // @ts-ignore
+        const podcastItems = this.apiData.debates.map<Podcast.Item>(async (apiItem) => {
             const description = await this.getDescription(apiItem);
             return {
                 title: apiItem.name,
@@ -47,5 +56,16 @@ export class JobMain extends AbstractJob<DebatDay> implements AbstractJobType {
     public async getCategoriesArray(apiItem: Debate): Promise<Array<string>> {
         const details = await this.getDebatDetails(new Date(apiItem.debateDate), apiItem.id);
         return details.categoryIds.map((cat) => cat);
+    }
+
+    public async runPipeline(): Promise<boolean> {
+        this.pipeline.push(saveRSS);
+        this.pipeline.push(uploadRSS);
+        this.pipeline.push(saveStatus);
+        this.pipeline.execute({
+            job: this,
+            messages: [],
+        });
+        return true;
     }
 }

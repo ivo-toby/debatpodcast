@@ -1,11 +1,6 @@
-import Podcast from 'podcast';
+import { FeedOptions } from 'podcast';
 
 export type RSSModel = {};
-
-export type QueueOptions = {
-    debateDate: Date,
-    feedOptions: Podcast.FeedOptions
-};
 
 export enum JobStatusEnum {
     QUEUE = 0,
@@ -19,17 +14,21 @@ export enum JobTypeEnum {
     debates = 1,
     plenair = 2,
     troelstra = 3,
-    politician = 4,
-    category = 5
+    thorbecke = 4,
+    politician = 5,
+    category = 6
 }
 
 export type AbstractJobType = {
     getData<T>(): Promise<T>,
     mapData(): Promise<RSSModel>,
     generateRSS(): string,
-    saveRSS(): Promise<boolean>,
-    saveData(): Promise<boolean>,
-    saveStatus(): Promise<boolean>,
-    process(options: QueueOptions): Promise<string>,
+    run(): Promise<boolean>,
+    runPipeline(): Promise<boolean>,
     output(): string
+};
+
+export type PodcastOptions = {
+    feedSettings?: FeedOptions,
+    debateDate?: Date
 };
