@@ -1,9 +1,10 @@
+import { DebatDay } from '../debatDirect/debatTypes';
 import { AbstractJobType } from './types';
 
 export default class JobQueue {
-    private jobs: Array<AbstractJobType> = [];
+    private jobs: Array<AbstractJobType<DebatDay>> = [];
 
-    add(job: AbstractJobType) {
+    add(job: AbstractJobType<DebatDay>) {
         this.jobs.push(job);
     }
 

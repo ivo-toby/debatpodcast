@@ -1,4 +1,4 @@
-import { FeedOptions } from 'podcast';
+import Podcast, { FeedOptions } from 'podcast';
 
 export type RSSModel = {};
 
@@ -19,7 +19,12 @@ export enum JobTypeEnum {
     category = 6
 }
 
-export type AbstractJobType = {
+export type AbstractJobType<TData> = {
+    podcastItems: Array<Podcast.Item>,
+    apiData: TData,
+    xml: string,
+    container: string,
+    options: PodcastOptions,
     getData<T>(): Promise<T>,
     mapData(): Promise<RSSModel>,
     generateRSS(): string,

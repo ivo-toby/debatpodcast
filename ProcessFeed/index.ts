@@ -14,7 +14,7 @@ const timerTrigger: AzureFunction = async (context: Context, myTimer: any): Prom
          * Create job object(s) to be run
          */
         const mainJob = jobFactory(JobTypeEnum.main, {
-            debateDate: new Date('2021-04-24'),
+            debateDate: new Date('2021-04-29'),
         });
         queue.add(mainJob);
 

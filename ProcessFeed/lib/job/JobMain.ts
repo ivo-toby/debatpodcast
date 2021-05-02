@@ -1,12 +1,15 @@
 import Podcast from 'podcast';
-import config from '../../config/main.json';
 import DebatDirectAPIClient from '../debatDirect/DebatDirectAPIClient';
 import { DebatDay, Debate, DebateDetails } from '../debatDirect/debatTypes';
 import { saveRSS, saveStatus, uploadRSS } from '../middleware';
 import AbstractJob from './AbstractJob';
 import { AbstractJobType, PodcastOptions } from './types';
 
-export default class JobMain extends AbstractJob<DebatDay> implements AbstractJobType {
+const config = require('../../config/main.json');
+
+export default class JobMain extends AbstractJob<DebatDay> implements AbstractJobType<DebatDay> {
+    public container = 'main';
+
     public constructor(options: PodcastOptions) {
         super({
             feedSettings: config,
@@ -28,7 +31,7 @@ export default class JobMain extends AbstractJob<DebatDay> implements AbstractJo
             return {
                 title: apiItem.name,
                 description: await this.getDescription(apiItem),
-                url: 'someurl',
+                url: 'https://rss.art19.com/episodes/3d6fa22b-868a-498e-a643-91a9d0205514.mp3',
                 date: apiItem.debateDate,
                 categories: await this.getCategoriesArray(apiItem),
                 itunesAuthor: process.env.itunesAuthor,
@@ -39,6 +42,7 @@ export default class JobMain extends AbstractJob<DebatDay> implements AbstractJo
             };
         });
         this.podcastItems = await Promise.all(podcastItems);
+
         return this.podcastItems;
     }
 

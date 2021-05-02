@@ -1,5 +1,4 @@
 {
-
     "title": "string Title of your site or feed",
     "description": "optional string A short description of the feed.",
     "generator": "optional string Feed generator.",

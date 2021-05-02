@@ -5,7 +5,7 @@ import {
     AbstractJobType, JobStatusEnum, JobTypeEnum, PodcastOptions,
 } from './types';
 
-export default abstract class AbstractJob<TData> implements AbstractJobType {
+export default abstract class AbstractJob<TData> implements AbstractJobType<TData> {
     protected status: JobStatusEnum = JobStatusEnum.QUEUE;
 
     protected type: JobTypeEnum;
@@ -16,11 +16,11 @@ export default abstract class AbstractJob<TData> implements AbstractJobType {
 
     public xml: string;
 
+    public container: string = '';
+
     protected pipeline: Pipeline<DebatPodcastPipelineContext>;
 
     public options: PodcastOptions;
-
-    public defaults: PodcastOptions;
 
     items: Array<Podcast.Item> = [];
 
