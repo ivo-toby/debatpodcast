@@ -1,0 +1,9 @@
+{
+    "bindings": [{
+        "name": "SyncAPI",
+        "type": "timerTrigger",
+        "direction": "in",
+        "schedule": "0 * */4 * * *"
+    }],
+    "scriptFile": "../dist/SyncAPI/index.js"
+}
