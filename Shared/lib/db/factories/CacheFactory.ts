@@ -29,6 +29,9 @@ export default class CacheFactory extends AbstractTableStorageFactory implements
     }
 
     async getCached<T>(type: string, rowKey: string): Promise<T | boolean> {
+        if (process.env.CACHE_DISABLE === 'true') {
+            return false;
+        }
         this.PartitionKey = type;
         await this.init();
         const hashedRowKey = createHash(rowKey);
@@ -46,6 +49,9 @@ export default class CacheFactory extends AbstractTableStorageFactory implements
     }
 
     async add<T>(type: string, rowKey: string, data: T): Promise<boolean> {
+        if (process.env.CACHE_DISABLE === 'true') {
+            return false;
+        }
         this.PartitionKey = type;
         await this.init();
         const hashedRowKey = createHash(rowKey);
