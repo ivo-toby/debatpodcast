@@ -26,7 +26,6 @@ async function saveRSS(
     }
     const containerClient = blobServiceClient.getContainerClient(job.container);
 
-    // Create a container if not exists
     if (createContainer) {
         const createContainerResponse = await containerClient.create();
         messages.push(`Create container ${job.container} successfully ${createContainerResponse.requestId}`);

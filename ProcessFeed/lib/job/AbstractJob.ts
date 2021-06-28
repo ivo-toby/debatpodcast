@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Podcast from 'podcast';
 import { Pipeline } from '../../../Shared/lib/createPipeline';
 import { createDebatPodcastPipeline, DebatPodcastPipelineContext } from '../pipeline';
@@ -37,7 +38,11 @@ export default abstract class AbstractJob<TData> implements AbstractJobType<TDat
 
     async mapData(): Promise<any> {
         console.error('NEEDS IMPLEMENTATION');
-        return new Promise<[Podcast.Item]>((resolve) => { resolve([{ url: '', date: new Date() }]); });
+        return new Promise<[Podcast.Item]>(
+            (resolve) => {
+                resolve([{ url: '', date: new Date() }]);
+            },
+        );
     }
 
     generateRSS(): string {
@@ -48,7 +53,9 @@ export default abstract class AbstractJob<TData> implements AbstractJobType<TDat
 
     async runPipeline(): Promise<boolean> {
         console.error('NEEDS IMPLEMENTATION');
-        return new Promise((resolve) => { resolve(true); });
+        return new Promise((resolve) => {
+            resolve(true);
+        });
     }
 
     async run(): Promise<boolean> {
