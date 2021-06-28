@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import Podcast from 'podcast';
+import { eachDayOfInterval } from 'date-fns';
 import { Pipeline } from '../../../Shared/lib/createPipeline';
 import { createDebatPodcastPipeline, DebatPodcastPipelineContext } from '../pipeline';
 import {
@@ -68,5 +69,12 @@ export default abstract class AbstractJob<TData> implements AbstractJobType<TDat
 
     output(): string {
         return this.xml;
+    }
+
+    public getDaysFromRange(dateStart: Date, dateEnd: Date): Array<Date> {
+        return eachDayOfInterval({
+            start: dateStart,
+            end: dateEnd,
+        });
     }
 }

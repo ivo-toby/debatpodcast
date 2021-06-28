@@ -7,7 +7,7 @@ import { AbstractJobType, PodcastOptions } from './types';
 
 const config = require('../../config/main.json');
 
-export default class JobMain extends AbstractJob<DebatDay> implements AbstractJobType<DebatDay> {
+export default class JobMain extends AbstractJob<DebatDay[]> implements AbstractJobType<DebatDay[]> {
     public container = 'main';
 
     public constructor(options: PodcastOptions) {
@@ -19,8 +19,12 @@ export default class JobMain extends AbstractJob<DebatDay> implements AbstractJo
 
     async getData<DebatDay>(): Promise<DebatDay> {
         const api = new DebatDirectAPIClient();
-        const { debateDate } = this.options;
-        this.apiData = await api.getDay(debateDate);
+        const { debateDateStart, debateDateEnd } = this.options;
+        const dateDays = this.getDaysFromRange(debateDateStart, (debateDateEnd || new Date()));
+        const apiCalls = dateDays.map(async (dayDate) => {
+            return api.getDay(dayDate);
+        });
+        this.apiData = await Promise.all(apiCalls);
         return this.apiData as unknown as DebatDay;
     }
 
@@ -63,13 +67,13 @@ export default class JobMain extends AbstractJob<DebatDay> implements AbstractJo
     }
 
     public async runPipeline(): Promise<boolean> {
-        this.pipeline.push(saveRSS);
-        this.pipeline.push(uploadRSS);
-        this.pipeline.push(saveStatus);
-        this.pipeline.execute({
-            job: this,
-            messages: [],
-        });
+        // this.pipeline.push(saveRSS);
+        // this.pipeline.push(uploadRSS);
+        // this.pipeline.push(saveStatus);
+        // this.pipeline.execute({
+        //     job: this,
+        //     messages: [],
+        // });
         return true;
     }
 }

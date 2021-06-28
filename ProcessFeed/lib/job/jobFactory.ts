@@ -3,11 +3,11 @@ import JobDebates from './JobDebates';
 import { AbstractJobType, JobTypeEnum, PodcastOptions } from './types';
 import { DebatDay } from '../debatDirect/debatTypes';
 
-export default function jobFactory(type: JobTypeEnum, options: PodcastOptions): AbstractJobType<DebatDay> {
-    let job: AbstractJobType<DebatDay>;
+export default function jobFactory(type: JobTypeEnum, options: PodcastOptions): AbstractJobType<DebatDay[]> {
+    let job: AbstractJobType<DebatDay[]>;
     switch (type) {
         case JobTypeEnum.debates:
-            job = new JobDebates(options);
+            // job = new JobDebates(options);
             break;
         case JobTypeEnum.main:
         default:

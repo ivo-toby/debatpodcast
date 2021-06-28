@@ -35,5 +35,6 @@ export type AbstractJobType<TData> = {
 
 export type PodcastOptions = {
     feedSettings?: FeedOptions,
-    debateDate?: Date
+    debateDateStart: Date,
+    debateDateEnd?: Date,
 };
