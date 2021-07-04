@@ -1,6 +1,6 @@
 import Podcast from 'podcast';
-import DebatDirectAPIClient from '../debatDirect/DebatDirectAPIClient';
-import { DebatDay, Debate, DebateDetails } from '../debatDirect/debatTypes';
+import DebatDirectAPIClient from '@shared/lib/debatDirect/DebatDirectAPIClient';
+import { DebatDay, Debate, DebateDetails } from '@shared/lib/debatDirect/debatTypes';
 import { saveRSS, saveStatus, uploadRSS } from '../middleware';
 import AbstractJob from './AbstractJob';
 import { AbstractJobType, PodcastOptions } from './types';

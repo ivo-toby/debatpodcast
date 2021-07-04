@@ -8,5 +8,10 @@
     "strict": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["Shared/*"]
+    },
+    "typeRoots" : ["./node_modules/@types", "./typings"]    
   }
 }

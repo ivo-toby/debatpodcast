@@ -1,7 +1,7 @@
 import JobMain from './JobMain';
 import JobDebates from './JobDebates';
 import { AbstractJobType, JobTypeEnum, PodcastOptions } from './types';
-import { DebatDay } from '../debatDirect/debatTypes';
+import { DebatDay } from '@shared/lib/debatDirect/debatTypes';
 
 export default function jobFactory(type: JobTypeEnum, options: PodcastOptions): AbstractJobType<DebatDay[]> {
     let job: AbstractJobType<DebatDay[]>;

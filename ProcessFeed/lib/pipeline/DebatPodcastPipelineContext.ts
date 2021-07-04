@@ -1,4 +1,4 @@
-import { DebatDay } from '../debatDirect/debatTypes';
+import { DebatDay } from '@shared/lib/debatDirect/debatTypes';
 import { AbstractJobType } from '../job/types';
 
 export type DebatPodcastPipelineContext = {

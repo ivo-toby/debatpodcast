@@ -1,4 +1,4 @@
-import { MiddlewareNext } from '../../../Shared/lib/createPipeline';
+import { MiddlewareNext } from '@shared/lib/createPipeline';
 import { DebatPodcastPipelineContext } from '../pipeline';
 
 async function saveStatus(

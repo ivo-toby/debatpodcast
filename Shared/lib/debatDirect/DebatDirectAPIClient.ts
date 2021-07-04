@@ -1,6 +1,6 @@
-import HttpClient from '../../../Shared/lib/HttpClient';
+import HttpClient from '../HttpClient';
 import { DebatDay, DebateDetails } from './debatTypes';
-import { CacheFactory } from '../../../Shared/lib/db/factories';
+import { CacheFactory } from '../db/factories';
 
 export default class DebatDirectAPIClient extends HttpClient {
     cache: CacheFactory;

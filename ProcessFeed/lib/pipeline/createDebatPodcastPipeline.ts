@@ -1,5 +1,5 @@
 import { DebatPodcastPipelineContext } from './DebatPodcastPipelineContext';
-import { createPipeline } from '../../../Shared/lib/createPipeline';
+import { createPipeline } from '@shared/lib/createPipeline';
 
 const createDebatPodcastPipeline = () => createPipeline<DebatPodcastPipelineContext>();
 

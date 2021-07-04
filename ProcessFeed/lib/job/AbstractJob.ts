@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import Podcast from 'podcast';
 import { eachDayOfInterval } from 'date-fns';
-import { Pipeline } from '../../../Shared/lib/createPipeline';
+import { Pipeline } from '@shared/lib/createPipeline';
 import { createDebatPodcastPipeline, DebatPodcastPipelineContext } from '../pipeline';
 import {
     AbstractJobType, JobStatusEnum, JobTypeEnum, PodcastOptions,
